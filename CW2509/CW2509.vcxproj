@@ -129,6 +129,8 @@
   <ItemGroup>
     <ClCompile Include="1.c" />
     <ClCompile Include="2.c" />
+    <ClCompile Include="dec.c" />
+    <ClCompile Include="mass.c" />
     <ClCompile Include="rand.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
