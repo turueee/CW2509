@@ -24,9 +24,6 @@
     <ClCompile Include="rand.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="mass.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="dec.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
