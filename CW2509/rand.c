@@ -9,7 +9,7 @@ double ran(double ymin, double ymax,int t)
 {
   double p = 0, y = 0, k = 0;
   int i = 0,x = 0;
-  srand(time(0)+t*424345);
+  srand(time(0)+t*4345);
   x = rand();
   p = (double)x / RAND_MAX;
   k = p * (ymax - ymin);
@@ -19,20 +19,16 @@ double ran(double ymin, double ymax,int t)
 
 int dec(double d)
 {
-  double i = 0, k = 0;
+  double i = 0;
   int y = 1;
   if (d >= 0)
   {
     i = d - floor(d);
-    printf("%lf\n", i);
   }
   else
     i = (-d) + ceil(d);
   i *= 1000000;
-  k = i;
   y = (int)round(i);
-  while (y % 10 == 0)
-    y /= 10;
   return y;
 }
 
