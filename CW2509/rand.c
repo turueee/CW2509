@@ -14,10 +14,11 @@
 
 int main()
 {
-  double random_number = 0,min_ch = 0, max_ch = 0;
-  int count_of_numbers = 0, counter = 0,index_of_massive = 0, dec_remain;
+  double random_number = 0,min_ch = 0, max_ch = 0, result = 0, number = 0;
+  int count_of_numbers = 0, counter = 0,index_of_massive = 0, dec_remain, index;
   char first_massive_of_remains[250000], second_massive_of_remains[250000];
   char third_massive_of_remains[250000], fourth_massive_of_remains[250000];
+  FILE* fil;
   for (counter; counter < 250000; counter++)
   {
     first_massive_of_remains[counter] = 0;
@@ -28,10 +29,25 @@ int main()
   scanf("%lf", &min_ch);
   scanf("%lf", &max_ch);
   scanf("%d", &count_of_numbers);
+
+  fil = fopen("stor.txt", "w");
   for (counter = 0; counter < count_of_numbers; counter++)
   {
     random_number = make_random_number(min_ch, max_ch,counter);
     dec_remain = make_dec_remain(random_number);
+    
+    if (counter < 1000000)
+    {
+      if (fil != NULL)
+        fprintf(fil, "%lf\n", random_number);
+      else
+        printf("IDIOT");
+    }
+    else
+    {
+      result += random_number;
+    }
+
     if (dec_remain >= 0 && dec_remain < 250000)
     {
       first_massive_of_remains[dec_remain] = 1;
@@ -48,6 +64,42 @@ int main()
     {
       fourth_massive_of_remains[dec_remain - 750000] = 1;
     }
-    printf("%lf %d\n", random_number, make_dec_remain(random_number));
   }
+  fclose(fil);
+
+  fil = fopen("stor.txt", "r");
+  for (counter = 0; counter < count_of_numbers; counter++)
+  {
+    fscanf(fil, "%lf\n", &number);
+
+    if (counter >= 0 && counter < 250000)
+    {
+      index = first_massive_of_remains[counter];
+    }
+    else if (counter >= 250000 && counter < 500000)
+    {
+      index = second_massive_of_remains[counter - 250000];
+    }
+    else if (counter >= 500000 && counter < 750000)
+    {
+      index = third_massive_of_remains[counter - 500000];
+    }
+    else
+    {
+      index = fourth_massive_of_remains[counter - 750000];
+    }
+    if (index == 1)
+    {
+      result -= number;
+      printf("-%lf\n", number);
+    }
+      
+    else
+    {
+      result += number;
+      printf("+%lf\n", number);
+    }
+  }
+
+  printf("%lf",result);
 }
